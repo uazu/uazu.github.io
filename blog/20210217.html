@@ -1,0 +1,448 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2021-02-17: The Stakker actor runtime: Beyond &quot;Go++&quot; - Uazú blog</title>
+
+
+
+
+        <!-- Custom HTML head -->
+
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Articles on Uazú crates">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="20210217.html" class="active">2021-02-17: The Stakker actor runtime: Beyond &quot;Go++&quot;</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+
+                    </div>
+
+                    <h1 class="menu-title">Uazú blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#2021-02-17-the-stakker-actor-runtime-beyond-go" id="2021-02-17-the-stakker-actor-runtime-beyond-go">2021-02-17: The <strong>Stakker</strong> actor runtime: Beyond &quot;Go++&quot;</a></h1>
+<p>It's been more than a year since <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a>'s first release, and it
+is now shipping in a commercial product, so it seems like time to
+announce it and compare notes on Rust actor systems in general.</p>
+<p>Contents:</p>
+<ul>
+<li><a href="#rust--asyncawait--runtime--go">Rust + async/await + runtime = Go++</a></li>
+<li><a href="#different-interpretations-of-the-actor-model">Different interpretations of the actor model</a></li>
+<li><a href="#when-multi-threaded-is-slower-than-single-threaded">When multi-threaded is slower than single-threaded</a></li>
+<li><a href="#stakker-features"><strong>Stakker</strong> features</a></li>
+<li><a href="#some-future-possibilities-for-stakker">Some future possibilities for <strong>Stakker</strong></a></li>
+<li><a href="#history">History</a></li>
+</ul>
+<h2><a class="header" href="#rust--asyncawait--runtime--go" id="rust--asyncawait--runtime--go">Rust + async/await + runtime = Go++</a></h2>
+<p>Rust's async/await was a big step forward, but now a lot of people
+seem to think that that's the end of the story, and that's how
+concurrency should be done in Rust.  However Rust can go much much
+further than that.  Async/await plus an associated runtime is
+effectively &quot;Go++&quot;, i.e. you can do almost everything Go can do but in
+a low-level Rust style.</p>
+<p>However the fact that there are a proliferation of actor crates shows
+that it doesn't cover everyone's requirements.  Async/await emphasises
+sequential execution.  Awaiting on something means your coroutine is
+blocking on one thing and can't receive any other events.  Whilst you
+can choose to await on multiple things, that is not what this model is
+streamlined for in the code.  The actor model on the other hand is the
+opposite.  In the purest actor model, nothing blocks.  By default
+everything is asynchronous and events can arrive from any source at
+any time.  Multiple calls can be outstanding on an actor, not just one
+as in the case of <code>await</code>.</p>
+<p>For things that are asynchronous in a big way with events arriving
+from all directions, or where trying to force things down a mostly
+sequential code path is just not going to work out, or where it is
+much cleaner to reason about things as a state machine plus incoming
+events (which is essentially what an actor is), then you really need
+an actor system.</p>
+<h2><a class="header" href="#different-interpretations-of-the-actor-model" id="different-interpretations-of-the-actor-model">Different interpretations of the actor model</a></h2>
+<p>My own crate <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> takes a pure &quot;nothing blocks&quot; approach.
+Once an actor is up and running, nothing blocks — ever.  Events
+arriving at an actor must be handled immediately.  If handling an
+event starts a process that may take some time, then the actor must
+arrange to be notified when that process is complete.  This is very
+clean and easy to reason about.</p>
+<p>However it seems that other actor implementations make various
+compromises to facilitate interop with async/await.  For example an
+actor may block the processing of its own queue whilst it waits for an
+external process to complete, e.g. an <code>await</code> call on something from
+the async/await ecosystem.  This is a slightly less pure
+interpretation of the actor model and does have a few downsides,
+risking delays of unrelated processes and maybe even deadlocks if the
+coder isn't careful.  It also complicates the queuing.</p>
+<p>If we have an awaitable object and wish to interface it to an actor
+system, the cleanest way is to wrap it in an actor and have that actor
+accept calls and queue them up internally, and feed them one by one to
+the awaitable object, i.e. sequentially.  This is because you can't
+have two awaits running at the same time on an awaitable object, which
+is a limitation that actors don't have.</p>
+<h2><a class="header" href="#when-multi-threaded-is-slower-than-single-threaded" id="when-multi-threaded-is-slower-than-single-threaded">When multi-threaded is slower than single-threaded</a></h2>
+<p>It's well known with <strong>rayon</strong> for example, that if your unit of work
+is too small, then parallelizing the job will make it slower.  So even
+though you now have 4 or 8 threads working on the problem, it takes
+longer to execute than with a single thread.  This is because the
+synchronization overheads dominate the execution time.  So to
+parallelize your job effectively, you have to split it into larger
+units of work.</p>
+<p>The same applies to actor systems.  Typically the work done when an
+actor handles a message is very small: update the state, and maybe
+send a message or two.  So spreading the handling of individual actor
+messages across threads is a bad idea because the unit of work is way
+too small.  So any implementation of an actor system on top of
+channels will not be very efficient.  You need to find a way to break
+things into larger units of work before sharing the work between
+threads.</p>
+<p>This is one of the reasons why <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> chooses to be
+single-threaded at its core (although several independent <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a>
+runtimes can be run on different threads).  This does shift the burden
+of dividing work between threads back to the coder, a job which the
+coder would perhaps prefer not to have to think about.  However if you
+care about efficiency, then you <em>have</em> to think about it.  And in any
+case, without a lot of care, throwing more threads at an actor system
+will just make it slower.  So typical actor code will likely run
+faster single-threaded anyway.</p>
+<p>There has been a lot of pressure on coders over the years to move away
+from single-threaded coding styles and to accept multi-threaded
+coding, despite all the complications it brings.  But this has been
+reduced to &quot;single-threaded bad, multi-threaded good&quot;, so people see a
+multi-threaded solution and think that it must be better.  But that's
+just not true.  The whole thing is a lot more nuanced than that.
+Really it comes down to: How big is your unit of work? i.e. how much
+work can you get done between synchronization points.</p>
+<p>People may say &quot;but single-threaded doesn't scale&quot;.  Well,
+multi-threaded doesn't scale either — at least it only lets you scale
+to the capacity of the machine.  Beyond that you have to think about
+load balancing or sharding or some other mechanism to distribute work
+between different machines.  So in any case adopting multi-threading
+is only going to solve your problems temporarily, and for actors will
+possibly even make things worse.</p>
+<p>So given that for an actor work-load, the unit of work is typically
+small compared to synchronization overheads, running multiple
+single-threaded actor runtimes is the way to go.  Load-balancing is
+something you're going to have to solve at a higher level anyway if
+you really want to scale.</p>
+<h2><a class="header" href="#stakker-features" id="stakker-features"><strong>Stakker</strong> features</a></h2>
+<p>Here are some of the features that make <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> different to some
+other Rust actor systems:</p>
+<ul>
+<li>
+<p><strong>Static checks:</strong> Everything possible is statically checked to find
+bugs at compile-time rather than run-time.  Whereas other actor
+systems may rely on dynamic checks behind the scenes to maintain
+safety (e.g. <code>RefCell</code>), <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> does this at compile-time.
+It uses the <strong>qcell</strong> crate to extend Rust's borrow-checking into
+actors.  For example, this guarantees and proves at compile-time
+that no actor can access any other actor's state.  So you can have
+confidence that your code will not unexpectedly panic due to a
+coding error causing a check to fail.  It also means that the checks
+have no runtime overhead.</p>
+</li>
+<li>
+<p><strong>High efficiency:</strong> Message queueing and execution does not require
+locks or atomics or allocations or <code>match</code>.  <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> does not
+use structures for messages, so does not need to <code>match</code> on them.
+Instead a message is a closure that makes a static call to a method
+on the destination actor <code>struct</code>.  When an actor sends a message,
+it adds a <code>FnOnce</code> to an internal queue that directly calls that
+method.  Rust is free to inline all that code, so handling a message
+can be reduced to a single branch to a piece of optimised inlined
+code that directly modifies the actor's state.  Rust may even choose
+to inline the constant values that you're passing within the
+message, effectively giving you specialization of the handler too.
+The <code>FnOnce</code> queue is a flat area of memory, so typically no
+allocations are required to queue or execute a message either.</p>
+</li>
+<li>
+<p><strong>Choice of implementations:</strong> <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> provides a choice of
+internal implementations controlled by cargo features, all behind
+the same fixed API.  So if you're running just one <code>Stakker</code>
+instance, internally it can use globals as an optimisation, but if
+you change your mind, you can just add a feature and it will switch
+off that optimisation.  If you don't want to risk the <code>unsafe</code> code
+within <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a>, you can turn off unsafe, and it will use safe
+alternatives (at some cost in memory and time).</p>
+</li>
+<li>
+<p><strong>Rust-native</strong>: <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> is as low-level and Rust-like as
+possible.  Everything that makes Rust what it is has been extended
+into the actor model.  So it is not an emulation of some other actor
+system on top of Rust, with all the inefficiencies that brings.
+Rather it aims to be a fully Rust-native actor system.  Amongst
+other things, this means everything possible is borrow-checked and
+type-checked; it means that the Rust compiler has static knowledge
+of what you're doing and can inline and optimise; it means that you
+can count on <code>drop</code> cleaning things up; and it means that everything
+is safe.</p>
+</li>
+<li>
+<p><strong>Event system independent:</strong> It is not tied to any particular
+underlying I/O or event system.  So it can layer on top of anything.
+Already implemented is <code>mio</code>, but it would be possible to layer it
+on top of <code>tokio</code> or <code>async_std</code> if required, or even on top of
+event loops from other languages.  One of the design requirements
+was that it should integrate well with C++ applications.  It
+requires just one timer from the external event system to drive the
+whole <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> timer queue.</p>
+</li>
+<li>
+<p><strong>Shared state:</strong> It's pragmatic about intentionally shared state.
+Whilst shared state is not allowed in the pure actor model, there is
+no way in Rust to stop someone passing around an <code>Rc&lt;RefCell&lt;V&gt;&gt;&gt;</code>
+— at least not without limiting other useful features of Rust.
+So <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> has a <code>Share&lt;V&gt;</code> to make this explicit, and also to
+make it statically-checked and safe from panics.  Since shared state
+is explicit, its use can be monitored in the codebase.</p>
+</li>
+<li>
+<p><strong>Single-threaded:</strong> Each <code>Stakker</code> instance runs
+single-threaded, so there are no locks, no atomics, no memory
+fences, etc, etc.  Your code will run unimpeded on that thread,
+using the full speed of the core.</p>
+</li>
+<li>
+<p><strong>Solid handling of failure:</strong> Actors can be arranged in trees, and
+if required actors can be set up to automatically fail upwards,
+destroying each actor and its children as the failure propagates.
+In addition a <code>Ret</code> will inform the caller if it is dropped, i.e. if
+the actor it was sent to (or that was storing it) has died, so
+callers have a way to deal with actor failure too.</p>
+</li>
+<li>
+<p><strong>Virtualization of time:</strong> <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> doesn't know where you got
+your <code>Instant</code> from, and it doesn't care.  So you can make time run
+faster for tests.</p>
+</li>
+<li>
+<p><strong>Zero overhead:</strong> Really zero overhead and as close to the metal as
+possible, wherever possible.</p>
+</li>
+</ul>
+<h2><a class="header" href="#some-future-possibilities-for-stakker" id="some-future-possibilities-for-stakker">Some future possibilities for <strong>Stakker</strong></a></h2>
+<ul>
+<li>
+<p>Actor coroutines that can be started by the actor itself, and that
+run alongside the actor with direct safe access to the actor's
+state.  This would allow certain parts of the actor's behaviour to
+be coded in a sequential way where that suits them.  Multiple
+coroutines could be run for a single actor.  Unfortunately it's
+impossible to implement this on top of async/await, because it needs
+an <code>'until_next_yield</code> lifetime.  With a planned feature of Rust
+generators it should be possible.</p>
+</li>
+<li>
+<p>Remote actors, i.e. allow sending calls to actors in other threads
+or on other machines.</p>
+</li>
+<li>
+<p>Crates to layer <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> on top of <code>tokio</code> or <code>async_std</code>, and
+to wrap awaitable objects.</p>
+</li>
+<li>
+<p>Support for offloading CPU-intensive work or I/O work to a
+threadpool.  This would be cleanest if integrated with actor
+coroutines.</p>
+</li>
+<li>
+<p>Maybe allow <code>Actor&lt;dyn Trait&gt;</code> instead of <code>Actor&lt;Box&lt;dyn Trait&gt;&gt;</code>,
+if Rust's new <code>union</code> of <code>ManuallyDrop</code> feature turns out to be
+helpful.</p>
+</li>
+</ul>
+<h2><a class="header" href="#history" id="history">History</a></h2>
+<ul>
+<li>A Lua actor system with actor coroutines was developed over 2012-2018</li>
+<li>Initial development of <strong>qcell</strong> happened 2018-2019</li>
+<li>A simple Rust actor library was developed in Rust in 2019</li>
+<li>This was redesigned and rewritten as the open-source <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a>
+crate later that year, with first release in Jan-2020</li>
+<li>As of Feb-2021 <a href="https://crates.io/crates/stakker"><strong>Stakker</strong></a> is shipping in a commercial product</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+
+
+            </nav>
+
+        </div>
+
+
+
+
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+
+    </body>
+</html>

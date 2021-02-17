@@ -1,0 +1,18 @@
+[book]
+title = "Stakker actor runtime guide"
+author = "Jim Peters"
+description = "A guide to the Stakker low-level actor runtime for Rust"
+
+[rust]
+edition = "2018"
+
+[build]
+build-dir = "../../stakker"
+create-missing = false
+
+[output.html]
+default-theme = "rust"
+site-url = "/stakker/"
+
+[output.html.fold]
+enable = true

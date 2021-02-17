@@ -1,0 +1,6 @@
+#!/bin/bash
+
+[ -f blog/src/SUMMARY.md ] || { echo "Running in wrong directory"; exit 1; }
+
+(cd stakker && mdbook build)
+(cd blog && mdbook build)
