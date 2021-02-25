@@ -1,6 +1,28 @@
 #!/bin/bash
 
-[ -f blog/src/SUMMARY.md ] || { echo "Running in wrong directory"; exit 1; }
+die() { echo "ABORT: $*"; exit 1; }
+
+[ -f blog/src/SUMMARY.md ] || die "Running in wrong directory"
 
 (cd stakker && mdbook build)
 (cd blog && mdbook build)
+
+# Redirects from old pages to newer versions
+cat <<EOF |
+stakker/d-retfwd.html g-retfwd.html
+stakker/d-retnone.html g-retnone.html
+stakker/d-term.html g-term.html
+stakker/d-toplevel.html g-toplevel.html
+stakker/d-traits.html g-traits.html
+stakker/d-waker.html g-waker.html
+EOF
+while read xx yy
+do
+    [ -f ../$xx ] && die "Can't create redirect for file that exists: $xx"
+    cat <<EOF >../$xx
+<html>
+<head><meta http-equiv="refresh" content="2; URL=./$yy" /></head>
+<body><p>Redirecting to <a href="$yy">$yy</a> ...</p></body>
+</html>
+EOF
+done

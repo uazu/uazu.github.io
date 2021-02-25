@@ -180,7 +180,9 @@ is also a dead end due to `union` only supporting `Copy` types on
 stable at present.  I have an [**unsized_enum**] crate which I believe
 is sound and could be the basis for `Actor<dyn Trait>` in **Stakker**,
 but I don't want to force it on all **Stakker** users.  I'd like to be
-able to offer a safe alternative as well.
+able to offer a safe alternative as well.  (Update: As of Feb-2021
+'union' supports `ManuallyDrop` which allows `?Sized`, so that might
+offer a better way, although it still requires `unsafe`.)
 
 So unfortunately it's not possible to do `Actor<dyn Trait>` right now,
 and one of the alternatives must be used instead.

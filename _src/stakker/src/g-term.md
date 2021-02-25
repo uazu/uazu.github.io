@@ -1,12 +1,14 @@
 # Handling expected and unexpected actor termination
 
-There are four ways that an actor can terminate.  These are
+There are five ways that an actor can terminate.  These are
 enumerated by the [`StopCause`] enum:
 
 - `Stopped`: Successful termination
 - `Failed`: Actor terminated itself due to some problem
 - `Killed`: Actor was killed by another entity
 - `Dropped`: The last [`ActorOwn`] referencing this actor was dropped
+- `Lost`: This indicates that the connection to a remote actor has
+  been lost.  Remote actors are not implemented yet.
 
 Both `Failed` and `Killed` have an associated boxed [`Error`].  When
 an actor is created, a notification handler `Ret<StopCause>` is

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Cargo features and safety - Stakker actor runtime guide</title>
+        <title>Top-level actor template - Stakker actor runtime guide</title>
         
         
 
@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="about.html">About Stakker</a></li><li class="chapter-item "><a href="faq.html"><strong aria-hidden="true">1.</strong> Stakker FAQ</a></li><li class="chapter-item expanded "><a href="d-intro.html"><strong aria-hidden="true">2.</strong> Stakker Design Notes</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="d-origin.html"><strong aria-hidden="true">2.1.</strong> Origin</a></li><li class="chapter-item "><a href="d-addr.html"><strong aria-hidden="true">2.2.</strong> Addressing events to objects</a></li><li class="chapter-item "><a href="d-deliv.html"><strong aria-hidden="true">2.3.</strong> Delivering events</a></li><li class="chapter-item "><a href="d-actor.html"><strong aria-hidden="true">2.4.</strong> Becoming an actor system</a></li><li class="chapter-item "><a href="d-guarantee.html"><strong aria-hidden="true">2.5.</strong> Actor guarantees</a></li><li class="chapter-item "><a href="d-lowlev.html"><strong aria-hidden="true">2.6.</strong> Low-level actors</a></li><li class="chapter-item "><a href="d-fast.html"><strong aria-hidden="true">2.7.</strong> Fast message execution</a></li><li class="chapter-item "><a href="d-queue.html"><strong aria-hidden="true">2.8.</strong> Queue execution behaviour</a></li><li class="chapter-item "><a href="d-time.html"><strong aria-hidden="true">2.9.</strong> Time virtualization</a></li><li class="chapter-item "><a href="d-events.html"><strong aria-hidden="true">2.10.</strong> Event source independence</a></li><li class="chapter-item "><a href="d-single.html"><strong aria-hidden="true">2.11.</strong> Single-threaded performance</a></li><li class="chapter-item "><a href="d-whysing.html"><strong aria-hidden="true">2.12.</strong> Why single-threaded?</a></li><li class="chapter-item "><a href="d-timers.html"><strong aria-hidden="true">2.13.</strong> Timer queue</a></li><li class="chapter-item "><a href="d-defer.html"><strong aria-hidden="true">2.14.</strong> Deferrer</a></li><li class="chapter-item "><a href="d-prep.html"><strong aria-hidden="true">2.15.</strong> Actor Prep state</a></li><li class="chapter-item "><a href="d-sig.html"><strong aria-hidden="true">2.16.</strong> Signatures of actor methods</a></li><li class="chapter-item "><a href="d-sigalt.html"><strong aria-hidden="true">2.17.</strong> Alternative signatures</a></li><li class="chapter-item "><a href="d-data.html"><strong aria-hidden="true">2.18.</strong> Data kept with actor state</a></li><li class="chapter-item "><a href="d-overh.html"><strong aria-hidden="true">2.19.</strong> Overhead of an actor</a></li><li class="chapter-item "><a href="d-macro.html"><strong aria-hidden="true">2.20.</strong> Macro argument structure</a></li><li class="chapter-item "><a href="d-drop.html"><strong aria-hidden="true">2.21.</strong> Dropping to clean up</a></li><li class="chapter-item expanded "><a href="d-feat.html" class="active"><strong aria-hidden="true">2.22.</strong> Cargo features and safety</a></li><li class="chapter-item "><a href="d-whyactor.html"><strong aria-hidden="true">2.23.</strong> Why use actors?</a></li></ol></li><li class="chapter-item "><a href="g-intro.html"><strong aria-hidden="true">3.</strong> Stakker Guide</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="g-ecosys.html"><strong aria-hidden="true">3.1.</strong> Finding Stakker-compatible crates</a></li><li class="chapter-item "><a href="g-retfwd.html"><strong aria-hidden="true">3.2.</strong> Ret and Fwd differences</a></li><li class="chapter-item "><a href="g-retnone.html"><strong aria-hidden="true">3.3.</strong> Detecting delivery failure</a></li><li class="chapter-item "><a href="g-term.html"><strong aria-hidden="true">3.4.</strong> Actor termination</a></li><li class="chapter-item "><a href="g-traits.html"><strong aria-hidden="true">3.5.</strong> Actor&lt;dyn Trait&gt;</a></li><li class="chapter-item "><a href="g-toplevel.html"><strong aria-hidden="true">3.6.</strong> Top-level actor template</a></li><li class="chapter-item "><a href="g-waker.html"><strong aria-hidden="true">3.7.</strong> Inter-thread communication</a></li></ol></li><li class="chapter-item "><a href="roadmap.html"><strong aria-hidden="true">4.</strong> Stakker Roadmap</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="about.html">About Stakker</a></li><li class="chapter-item "><a href="faq.html"><strong aria-hidden="true">1.</strong> Stakker FAQ</a></li><li class="chapter-item "><a href="d-intro.html"><strong aria-hidden="true">2.</strong> Stakker Design Notes</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="d-origin.html"><strong aria-hidden="true">2.1.</strong> Origin</a></li><li class="chapter-item "><a href="d-addr.html"><strong aria-hidden="true">2.2.</strong> Addressing events to objects</a></li><li class="chapter-item "><a href="d-deliv.html"><strong aria-hidden="true">2.3.</strong> Delivering events</a></li><li class="chapter-item "><a href="d-actor.html"><strong aria-hidden="true">2.4.</strong> Becoming an actor system</a></li><li class="chapter-item "><a href="d-guarantee.html"><strong aria-hidden="true">2.5.</strong> Actor guarantees</a></li><li class="chapter-item "><a href="d-lowlev.html"><strong aria-hidden="true">2.6.</strong> Low-level actors</a></li><li class="chapter-item "><a href="d-fast.html"><strong aria-hidden="true">2.7.</strong> Fast message execution</a></li><li class="chapter-item "><a href="d-queue.html"><strong aria-hidden="true">2.8.</strong> Queue execution behaviour</a></li><li class="chapter-item "><a href="d-time.html"><strong aria-hidden="true">2.9.</strong> Time virtualization</a></li><li class="chapter-item "><a href="d-events.html"><strong aria-hidden="true">2.10.</strong> Event source independence</a></li><li class="chapter-item "><a href="d-single.html"><strong aria-hidden="true">2.11.</strong> Single-threaded performance</a></li><li class="chapter-item "><a href="d-whysing.html"><strong aria-hidden="true">2.12.</strong> Why single-threaded?</a></li><li class="chapter-item "><a href="d-timers.html"><strong aria-hidden="true">2.13.</strong> Timer queue</a></li><li class="chapter-item "><a href="d-defer.html"><strong aria-hidden="true">2.14.</strong> Deferrer</a></li><li class="chapter-item "><a href="d-prep.html"><strong aria-hidden="true">2.15.</strong> Actor Prep state</a></li><li class="chapter-item "><a href="d-sig.html"><strong aria-hidden="true">2.16.</strong> Signatures of actor methods</a></li><li class="chapter-item "><a href="d-sigalt.html"><strong aria-hidden="true">2.17.</strong> Alternative signatures</a></li><li class="chapter-item "><a href="d-data.html"><strong aria-hidden="true">2.18.</strong> Data kept with actor state</a></li><li class="chapter-item "><a href="d-overh.html"><strong aria-hidden="true">2.19.</strong> Overhead of an actor</a></li><li class="chapter-item "><a href="d-macro.html"><strong aria-hidden="true">2.20.</strong> Macro argument structure</a></li><li class="chapter-item "><a href="d-drop.html"><strong aria-hidden="true">2.21.</strong> Dropping to clean up</a></li><li class="chapter-item "><a href="d-feat.html"><strong aria-hidden="true">2.22.</strong> Cargo features and safety</a></li><li class="chapter-item "><a href="d-whyactor.html"><strong aria-hidden="true">2.23.</strong> Why use actors?</a></li></ol></li><li class="chapter-item expanded "><a href="g-intro.html"><strong aria-hidden="true">3.</strong> Stakker Guide</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="g-ecosys.html"><strong aria-hidden="true">3.1.</strong> Finding Stakker-compatible crates</a></li><li class="chapter-item "><a href="g-retfwd.html"><strong aria-hidden="true">3.2.</strong> Ret and Fwd differences</a></li><li class="chapter-item "><a href="g-retnone.html"><strong aria-hidden="true">3.3.</strong> Detecting delivery failure</a></li><li class="chapter-item "><a href="g-term.html"><strong aria-hidden="true">3.4.</strong> Actor termination</a></li><li class="chapter-item "><a href="g-traits.html"><strong aria-hidden="true">3.5.</strong> Actor&lt;dyn Trait&gt;</a></li><li class="chapter-item expanded "><a href="g-toplevel.html" class="active"><strong aria-hidden="true">3.6.</strong> Top-level actor template</a></li><li class="chapter-item "><a href="g-waker.html"><strong aria-hidden="true">3.7.</strong> Inter-thread communication</a></li></ol></li><li class="chapter-item "><a href="roadmap.html"><strong aria-hidden="true">4.</strong> Stakker Roadmap</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -155,42 +155,58 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#cargo-features-and-safety" id="cargo-features-and-safety">Cargo features and safety</a></h1>
-<p>By default <strong>Stakker</strong> uses some <code>unsafe</code> for efficiency.  This means
-it uses implementations that require less memory or less CPU time.
-However, if you wish, you can enable the &quot;no-unsafe&quot; Cargo feature,
-and the whole crate will be compiled with <code>#[forbid(unsafe_code)]</code>,
-and fully safe implementations are used instead.  You lose some
-efficiency, but for many applications that would make little
-difference, so use this if minimising <code>unsafe</code> is important for your
-project.</p>
-<p>There are other cargo features that switch in and out different
-underlying implementations to optimise for different cases.  However
-the external API of the crate does not change when features are
-changed.  The API should operate identically.</p>
-<p>Note that since Cargo features are additive, it's necessary that when
-more than one crate in a build uses <strong>Stakker</strong>, the <strong>Stakker</strong> build
-should be compatible with all of them, i.e. provide the lowest common
-denominator.  So this typically means using the less optimal
-implementation.</p>
-<p>Note that crates should not enable <strong>Stakker</strong> cargo features unless
-they really need them.  It should be up to the top-level application
-to add features as required.  Note that even if the top-level
-application does not use <strong>Stakker</strong> directly, it is still possible to
-list the crate as a dependency in order to select cargo features.</p>
+                        <h1><a class="header" href="#top-level-actor-template" id="top-level-actor-template">Top-level actor template</a></h1>
+<p>The following template may be helpful for writing big top-level actors
+that need to accept configuration and need to be connected up to other
+actors through <a href="https://docs.rs/stakker/*/stakker/struct.Fwd.html"><code>Fwd</code></a> instances.</p>
+<pre><code class="language-rust no_run noplayground">/// `Widget` actor configuration.  Includes serde deserialization
+/// support.
+#[derive(Deserialize, Clone)]
+#[serde(deny_unknown_fields)]
+pub struct WidgetConf {
+    // ... configuration values ...
+}
+
+/// `Widget` instance callbacks
+pub struct WidgetFwds {
+    // ... `Fwd` and `Share` values that the actor needs to talk to
+    //   other actors and to access any shared resources ...
+}
+
+/// `Widget` actor
+pub struct Widget {
+    conf: WidgetConf,
+    fwds: WidgetFwds,
+    // ... actor state ...
+}
+
+impl Widget {
+    /// Initialise the Widget actor
+    pub fn init(cx: CX![], conf: WidgetConf, fwds: WidgetFwds) -&gt; Option&lt;Self&gt; {
+       // ...
+       Some(Self {
+           conf,
+           fwds,
+           // ...
+       })
+    }
+
+    //... all other actor methods ...
+}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="d-drop.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="g-traits.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="d-whyactor.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="g-waker.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -202,13 +218,13 @@ list the crate as a dependency in order to select cargo features.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="d-drop.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="g-traits.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="d-whyactor.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="g-waker.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

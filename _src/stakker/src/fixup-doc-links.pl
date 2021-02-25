@@ -19,6 +19,8 @@ my $links = <<"EOF";
 [**stakker_macros**]: $CRATES/stakker_macros
 [**stakker_tui**]: $CRATES/stakker_tui
 [**unsized_enum**]: $CRATES/unsized_enum
+[**regex**]: $CRATES/regex
+[**tungstenite**]: $CRATES/tungstenite
 [`fail`]: $DOCS/struct.Cx.html#method.fail
 [`fail_str`]: $DOCS/struct.Cx.html#method.fail_str
 [`kill`]: $DOCS/struct.Actor.html#method.kill
