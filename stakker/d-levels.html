@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Privilege levels - Stakker actor runtime guide</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A guide to the Stakker low-level actor runtime for Rust">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="about.html">About Stakker</a></li><li class="chapter-item "><a href="faq.html"><strong aria-hidden="true">1.</strong> Stakker FAQ</a></li><li class="chapter-item expanded "><a href="d-intro.html"><strong aria-hidden="true">2.</strong> Stakker Design Notes</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="d-origin.html"><strong aria-hidden="true">2.1.</strong> Origin</a></li><li class="chapter-item "><a href="d-addr.html"><strong aria-hidden="true">2.2.</strong> Addressing events to objects</a></li><li class="chapter-item "><a href="d-deliv.html"><strong aria-hidden="true">2.3.</strong> Delivering events</a></li><li class="chapter-item "><a href="d-actor.html"><strong aria-hidden="true">2.4.</strong> Becoming an actor system</a></li><li class="chapter-item "><a href="d-guarantee.html"><strong aria-hidden="true">2.5.</strong> Actor guarantees</a></li><li class="chapter-item expanded "><a href="d-levels.html" class="active"><strong aria-hidden="true">2.6.</strong> Privilege levels</a></li><li class="chapter-item "><a href="d-lowlev.html"><strong aria-hidden="true">2.7.</strong> Low-level actors</a></li><li class="chapter-item "><a href="d-fast.html"><strong aria-hidden="true">2.8.</strong> Fast message execution</a></li><li class="chapter-item "><a href="d-queue.html"><strong aria-hidden="true">2.9.</strong> Queue execution behaviour</a></li><li class="chapter-item "><a href="d-time.html"><strong aria-hidden="true">2.10.</strong> Time virtualization</a></li><li class="chapter-item "><a href="d-events.html"><strong aria-hidden="true">2.11.</strong> Event source independence</a></li><li class="chapter-item "><a href="d-single.html"><strong aria-hidden="true">2.12.</strong> Single-threaded performance</a></li><li class="chapter-item "><a href="d-whysing.html"><strong aria-hidden="true">2.13.</strong> Why single-threaded?</a></li><li class="chapter-item "><a href="d-timers.html"><strong aria-hidden="true">2.14.</strong> Timer queue</a></li><li class="chapter-item "><a href="d-defer.html"><strong aria-hidden="true">2.15.</strong> Deferrer</a></li><li class="chapter-item "><a href="d-prep.html"><strong aria-hidden="true">2.16.</strong> Actor Prep state</a></li><li class="chapter-item "><a href="d-sig.html"><strong aria-hidden="true">2.17.</strong> Signatures of actor methods</a></li><li class="chapter-item "><a href="d-sigalt.html"><strong aria-hidden="true">2.18.</strong> Alternative signatures</a></li><li class="chapter-item "><a href="d-data.html"><strong aria-hidden="true">2.19.</strong> Data kept with actor state</a></li><li class="chapter-item "><a href="d-overh.html"><strong aria-hidden="true">2.20.</strong> Overhead of an actor</a></li><li class="chapter-item "><a href="d-macro.html"><strong aria-hidden="true">2.21.</strong> Macro argument structure</a></li><li class="chapter-item "><a href="d-drop.html"><strong aria-hidden="true">2.22.</strong> Dropping to clean up</a></li><li class="chapter-item "><a href="d-feat.html"><strong aria-hidden="true">2.23.</strong> Cargo features and safety</a></li><li class="chapter-item "><a href="d-nodetach.html"><strong aria-hidden="true">2.24.</strong> Why no detached actors?</a></li><li class="chapter-item "><a href="d-whyactor.html"><strong aria-hidden="true">2.25.</strong> Why use actors?</a></li></ol></li><li class="chapter-item "><a href="g-intro.html"><strong aria-hidden="true">3.</strong> Stakker Guide</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="g-approach.html"><strong aria-hidden="true">3.1.</strong> The actor way of thinking</a></li><li class="chapter-item "><a href="g-ecosys.html"><strong aria-hidden="true">3.2.</strong> Finding Stakker-compatible crates</a></li><li class="chapter-item "><a href="g-retfwd.html"><strong aria-hidden="true">3.3.</strong> Ret and Fwd differences</a></li><li class="chapter-item "><a href="g-retnone.html"><strong aria-hidden="true">3.4.</strong> Detecting delivery failure</a></li><li class="chapter-item "><a href="g-term.html"><strong aria-hidden="true">3.5.</strong> Actor termination</a></li><li class="chapter-item "><a href="g-traits.html"><strong aria-hidden="true">3.6.</strong> Actor&lt;dyn Trait&gt;</a></li><li class="chapter-item "><a href="g-toplevel.html"><strong aria-hidden="true">3.7.</strong> Top-level actor template</a></li><li class="chapter-item "><a href="g-waker.html"><strong aria-hidden="true">3.8.</strong> Inter-thread communication</a></li></ol></li><li class="chapter-item "><a href="roadmap.html"><strong aria-hidden="true">4.</strong> Stakker Roadmap</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Stakker actor runtime guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#privilege-levels" id="privilege-levels">Privilege levels</a></h1>
+<p>Another way of looking at the statically-checked cell borrowing
+approach used by <strong>Stakker</strong> (i.e. <a href="https://crates.io/crates/qcell"><strong>qcell</strong></a>-based borrowing) is to
+consider all the code associated with the actor system as belonging to
+one of three privilege levels.</p>
+<p><strong>Level 0</strong>: Code in the highest level of privilege has access to a
+<code>&amp;mut Stakker</code>.  This is the code outside of the actor system (the
+main loop and any associated external code that the actor system
+interfaces to) and the code called by the main loop that handles a
+queue-deferred action (actor call, return, forward, etc).  In terms of
+statically-checked borrowing, both the <a href="https://docs.rs/stakker/*/stakker/struct.Actor.html"><code>Actor</code></a>-owner and
+<a href="https://docs.rs/stakker/*/stakker/struct.Share.html"><code>Share</code></a>-owner are available.</p>
+<p><strong>Level 1</strong>: Actor methods all run in this level.  They have a <code>&amp;mut Core</code> (maybe via a <code>&amp;mut Cx</code>), but have no access to <a href="https://docs.rs/stakker/*/stakker/struct.Stakker.html"><code>Stakker</code></a>
+methods.  In terms of statically-checked borrowing, the
+<a href="https://docs.rs/stakker/*/stakker/struct.Actor.html"><code>Actor</code></a>-owner is unavailable (because it was used to get access to
+the actor state), but the <a href="https://docs.rs/stakker/*/stakker/struct.Share.html"><code>Share</code></a>-owner is still free.</p>
+<p><strong>Level 2</strong>: Methods called on <a href="https://docs.rs/stakker/*/stakker/struct.Share.html"><code>Share</code></a> objects run in this level, as
+well as <code>Drop</code> handlers.  In fact any code which doesn't accept a
+<code>&amp;mut Core</code> or <code>&amp;mut Cx</code> argument runs in this level.  Neither of the
+cell owners are available.  In the case of a method call on a
+<a href="https://docs.rs/stakker/*/stakker/struct.Share.html"><code>Share</code></a> object (e.g. <code>share.rw(cx).method(args)</code>), the <code>&amp;mut Core</code>
+isn't available because it was used to get access to the share.</p>
+<p>If you take a snapshot of the callstack at any point in time you'd
+find code running in one or more of these levels.  At the base of the
+stack would be the main loop code, in level 0.  If an actor method is
+running then this would be code in level 1.  If the actor is calling
+out to <a href="https://docs.rs/stakker/*/stakker/struct.Share.html"><code>Share</code></a> code or arbitrary external libraries, this would be
+code in level 2.  The levels form bands on the callstack.</p>
+<p>Here are some examples of different things you can do at different
+levels:</p>
+<table><thead><tr><th>Level:</th><th align="center">0: main loop</th><th align="center">1: actor methods</th><th align="center">2: share methods,<br/>drop handlers</th></tr></thead><tbody>
+<tr><td>Available borrow:</td><td align="center"><code>&amp;mut Stakker</code></td><td align="center"><code>&amp;mut Core</code> or<br/><code>&amp;mut Cx</code></td><td align="center">none</td></tr>
+<tr><td>Run the queues</td><td align="center">Yes</td><td align="center">-</td><td align="center">-</td></tr>
+<tr><td>Run an actor call</td><td align="center">Yes</td><td align="center">-</td><td align="center">-</td></tr>
+<tr><td><a href="https://docs.rs/stakker/*/stakker/macro.query.html"><code>query!</code></a> an actor</td><td align="center">Yes</td><td align="center">-</td><td align="center">-</td></tr>
+<tr><td><a href="https://docs.rs/stakker/*/stakker/macro.lazy.html"><code>lazy!</code></a>, <a href="https://docs.rs/stakker/*/stakker/macro.idle.html"><code>idle!</code></a></td><td align="center">Yes</td><td align="center">Yes</td><td align="center">-</td></tr>
+<tr><td><a href="https://docs.rs/stakker/*/stakker/macro.after.html"><code>after!</code></a>, <a href="https://docs.rs/stakker/*/stakker/macro.at.html"><code>at!</code></a>, etc</td><td align="center">Yes</td><td align="center">Yes</td><td align="center">-</td></tr>
+<tr><td>Access a <a href="https://docs.rs/stakker/*/stakker/struct.Share.html"><code>Share</code></a></td><td align="center">Yes</td><td align="center">Yes</td><td align="center">-</td></tr>
+<tr><td><a href="https://docs.rs/stakker/*/stakker/macro.ret.html"><code>ret!</code></a> data to <a href="https://docs.rs/stakker/*/stakker/struct.Ret.html"><code>Ret</code></a></td><td align="center">Yes</td><td align="center">Yes</td><td align="center">Yes</td></tr>
+<tr><td><a href="https://docs.rs/stakker/*/stakker/macro.fwd.html"><code>fwd!</code></a> data to <a href="https://docs.rs/stakker/*/stakker/struct.Fwd.html"><code>Fwd</code></a></td><td align="center">Yes</td><td align="center">Yes</td><td align="center">Yes</td></tr>
+<tr><td><a href="https://docs.rs/stakker/*/stakker/macro.call.html"><code>call!</code></a> an actor</td><td align="center">Yes</td><td align="center">Yes</td><td align="center">Yes</td></tr>
+<tr><td>defer using <a href="https://docs.rs/stakker/*/stakker/struct.Deferrer.html"><code>Deferrer</code></a></td><td align="center">Yes</td><td align="center">Yes</td><td align="center">Yes</td></tr>
+</tbody></table>
+<p>Remember that these levels are statically enforced by the compiler
+(without any runtime overhead), so there is no way around it in safe
+code.  However note that even in level 2, you can defer an operation,
+or forward data elsewhere.  So the system of &quot;privileges&quot; only stops
+you doing things <em>right now</em>.  It doesn't stop you doing them a little
+bit later.  So it blocks synchronous operations when those could
+potentially cause issues, but doesn't stop you doing those same things
+asynchronously.</p>
+<p>Also note that even in the internal code of <strong>Stakker</strong> it's
+impossible to break these rules.  The rules are enforced by the Rust
+compiler and a tiny bit of code in <a href="https://crates.io/crates/qcell"><strong>qcell</strong></a>.  If a borrow is
+performed to get access to an actor's state, then the <code>&amp;mut Stakker</code>
+borrow is locked up until that actor borrow is released.  Similarly a
+share borrow locks up the <code>&amp;mut Cx</code> or <code>&amp;mut Core</code>.  See <a href="https://crates.io/crates/qcell"><strong>qcell</strong></a>
+documentation for more details.  So this provides a very strong
+guarantee of correctness.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="d-guarantee.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="d-lowlev.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="d-guarantee.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="d-lowlev.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

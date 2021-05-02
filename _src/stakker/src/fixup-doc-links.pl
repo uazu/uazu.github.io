@@ -30,6 +30,7 @@ my $links = <<"EOF";
 [`Actor`]: $DOCS/struct.Actor.html
 [`ActorOwn`]: $DOCS/struct.ActorOwn.html
 [`ActorOwnAnon`]: $DOCS/struct.ActorOwnAnon.html
+[`ActorOwnSlab`]: $DOCS/struct.ActorOwnSlab.html
 [`Core`]: $DOCS/struct.Core.html
 [`Deferrer`]: $DOCS/struct.Deferrer.html
 [`Share`]: $DOCS/struct.Share.html
@@ -44,6 +45,13 @@ my $links = <<"EOF";
 [`ret_tmo_to!`]: $DOCS/macro.ret_tmo_to.html
 [`ret_to!`]: $DOCS/macro.ret_to.html
 [`ret_nop!`]: $DOCS/macro.ret_nop.html
+[`after!`]: $DOCS/macro.after.html
+[`at!`]: $DOCS/macro.at.html
+[`fwd!`]: $DOCS/macro.fwd.html
+[`idle!`]: $DOCS/macro.idle.html
+[`lazy!`]: $DOCS/macro.lazy.html
+[`query!`]: $DOCS/macro.query.html
+[`ret!`]: $DOCS/macro.ret.html
 [`TLCell`]: $QCELL/struct.TLCell.html
 [`Error`]: $STD/error/trait.Error.html
 [`BTreeMap`]: $STD/collections/struct.BTreeMap.html
