@@ -38,15 +38,15 @@ to suggestions if someone has done this before.
 **Related crates:**
 
 - [**stakker_mio**]
-- [**stakker_macros**]
 - [**stakker_tui**]
 - [**stakker_log**]
+- [**stakker_async_await**]
 - [**qcell**]
 
 Let me know if you have a crate you'd like added here.
 
 [**qcell**]: https://crates.io/crates/qcell
+[**stakker_async_await**]: https://crates.io/crates/stakker_async_await
 [**stakker_log**]: https://crates.io/crates/stakker_log
-[**stakker_macros**]: https://crates.io/crates/stakker_macros
 [**stakker_mio**]: https://crates.io/crates/stakker_mio
 [**stakker_tui**]: https://crates.io/crates/stakker_tui

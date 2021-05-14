@@ -16,6 +16,7 @@ my $links = <<"EOF";
 [**qcell**]: $CRATES/qcell
 [**stakker_mio**]: $CRATES/stakker_mio
 [**stakker_log**]: $CRATES/stakker_log
+[**stakker_async_await**]: $CRATES/stakker_async_await
 [**stakker_macros**]: $CRATES/stakker_macros
 [**stakker_tui**]: $CRATES/stakker_tui
 [**unsized_enum**]: $CRATES/unsized_enum
